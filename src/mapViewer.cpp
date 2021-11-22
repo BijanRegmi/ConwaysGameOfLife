@@ -22,6 +22,15 @@ void MapViewer::Update(){
     map_obj->Update();
 }
 
+void MapViewer::handleInput(sf::Event* ev, sf::RenderWindow* win){
+    if (ev->type == sf::Event::MouseButtonPressed && ev->key.code == sf::Mouse::Left){
+        sf::Vector2i mPos = sf::Mouse::getPosition(*win);
+        float dx = width/cols, dy = height/rows;
+        int  col = mPos.x/dx, row = mPos.y/dy;
+        map_obj->fill(row, col);
+    }
+}
+
 void MapViewer::grid(){
     int numLines = cols+rows-2;
     sf::VertexArray grid(sf::Lines, 2*(numLines));
@@ -43,8 +52,21 @@ void MapViewer::grid(){
     _texture.draw(grid);
 }
 
+void MapViewer::drawAliveCells(){
+    for (int i=0; i<rows; ++i){
+        for (int j=0; j<cols; ++j){
+            if (map_obj->isAlive(i, j)){
+                sf::RectangleShape rect(sf::Vector2f(width/cols, height/rows));
+                rect.setPosition(j*width/cols, i*height/rows);
+                _texture.draw(rect);
+            }
+        }
+    }
+}
+
 void MapViewer::Draw(){
     _texture.clear();
     grid();
+    drawAliveCells();
     _texture.display();
 }
