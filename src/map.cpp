@@ -41,6 +41,14 @@ void map::Calc(){
             y->calc();
 }
 
+void map::fill(int r, int c){
+    map_array[r][c]->Alive.oldgen ^= true;
+}
+
+bool map::isAlive(int r, int c){
+    return map_array[r][c]->Alive.oldgen;
+}
+
 void map::Update(){
     Calc();
     for (auto x: map_array)
@@ -51,7 +59,8 @@ void map::Update(){
 void map::PrintMap(){
     for (auto x: map_array){
         for (auto y: x)
-            std::cout << ((y->Alive.oldgen) ? "*" : " ");
+            std::cout << ((y->Alive.oldgen) ? "a" : "d");
         std::cout << std::endl;
     }
+    std::cout << std::endl;
 }
