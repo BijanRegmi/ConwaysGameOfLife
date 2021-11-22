@@ -15,14 +15,14 @@ map::map(int x, int y){
     // Add Neighbors
     for (int row=0; row<y; ++row){
         for (int col=0; col<x; ++col){
-            if (row>0)              map_array[row][col]->AddNeighbor(map_array[row-1][col]);      // Top
-            if (row<y-1)            map_array[row][col]->AddNeighbor(map_array[row+1][col]);      // Bottom
-            if (col>0)              map_array[row][col]->AddNeighbor(map_array[row][col-1]);      // Left
-            if (col<x-1)            map_array[row][col]->AddNeighbor(map_array[row][col+1]);      // Right
-            if (row>0&&col>0)       map_array[row][col]->AddNeighbor(map_array[row-1][col-1]);    // TopLeft
-            if (row>0&&col<x-1)     map_array[row][col]->AddNeighbor(map_array[row-1][col+1]);    // TopRight
-            if (row<y-1&&col>0)     map_array[row][col]->AddNeighbor(map_array[row+1][col-1]);    // BottomLeft
-            if (row<y-1&&col<x-1)   map_array[row][col]->AddNeighbor(map_array[row+1][col+1]);    // BottomRight
+            for (int i=-1; i<2; ++i){
+                for (int j=-1; j<2; ++j){
+                    if (!i && !j) continue;
+                    int r = (row+i+y)%y;
+                    int c = (col+j+x)%x;
+                    map_array[row][col]->AddNeighbor(map_array[r][c]);
+                }
+            }
         }
     }
 }
@@ -54,13 +54,4 @@ void map::Update(){
     for (auto x: map_array)
         for (auto y: x)
             y->Update();
-}
-
-void map::PrintMap(){
-    for (auto x: map_array){
-        for (auto y: x)
-            std::cout << ((y->Alive.oldgen) ? "a" : "d");
-        std::cout << std::endl;
-    }
-    std::cout << std::endl;
 }
