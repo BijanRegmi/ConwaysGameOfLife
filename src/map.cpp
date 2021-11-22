@@ -1,4 +1,5 @@
 #include "map.hpp"
+#include <iostream>
 
 map::map(int x, int y){
     // Create map array
@@ -26,6 +27,14 @@ map::map(int x, int y){
     }
 }
 
+map::~map(){
+    for (int i=0, j=map_array.size(); i<j; ++i){
+        for (int k=0, l=map_array[i].size(); k<l; ++k){
+            delete map_array[i][k];
+        }
+    }
+}
+
 void map::Calc(){
     for (auto x: map_array)
         for (auto y: x)
@@ -37,4 +46,12 @@ void map::Update(){
     for (auto x: map_array)
         for (auto y: x)
             y->Update();
+}
+
+void map::PrintMap(){
+    for (auto x: map_array){
+        for (auto y: x)
+            std::cout << ((y->Alive.oldgen) ? "*" : " ");
+        std::cout << std::endl;
+    }
 }
