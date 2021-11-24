@@ -29,3 +29,8 @@ void ScrollNum::eventHandler(sf::Event& ev, sf::Window& win){
         }
     }
 }
+
+int ScrollNum::getNum(){
+    std::string str = this->getString();
+    return std::stoi(str);
+}
