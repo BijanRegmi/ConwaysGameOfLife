@@ -3,9 +3,9 @@
 #include <iostream>
 
 int main(){
-    const int FPS = 60;
-    const int WIDTH = 600;
-    const int HEIGHT = 600;
+    const int FPS = 10;
+    const int WIDTH = 1200;
+    const int HEIGHT = 800;
 
     sf::RenderWindow win(sf::VideoMode(WIDTH, HEIGHT), "GOL", sf::Style::Default);
     win.setFramerateLimit(FPS);

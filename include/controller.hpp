@@ -17,11 +17,12 @@ private:
     Button step;
 
     ScrollNum grid_row;
-    ScrollNum grid_num;
+    ScrollNum grid_col;
 
     MapViewer& mv;
 
     sf::RenderWindow& win;
+    sf::Font font;
 
     void onStart();
     void onStop();
