@@ -1,3 +1,5 @@
+#pragma once
+
 #include <SFML/Graphics.hpp>
 #include "map.hpp"
 
@@ -15,6 +17,7 @@ private:
     void grid();
     void drawAliveCells();
 public:
+    MapViewer(){}
     MapViewer(int width, int height);
     void CreateMap(int x, int y);
     void handleInput(sf::Event* ev, sf::RenderWindow* win);

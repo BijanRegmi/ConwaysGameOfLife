@@ -1,4 +1,5 @@
 #include "mapViewer.hpp"
+#include "controller.hpp"
 #include <iostream>
 
 int main(){
@@ -11,11 +12,13 @@ int main(){
     sf::Event ev;
 
     MapViewer mv(WIDTH, HEIGHT);
-    mv.CreateMap(8, 8);
+    controller ct(WIDTH, HEIGHT, mv, win);
+    mv.CreateMap(40, 40);
 
     while(win.isOpen()){
         while(win.pollEvent(ev)){
             mv.handleInput(&ev, &win);
+            ct.handleInputs(ev);
             if (ev.type == sf::Event::KeyPressed){
                 if(ev.key.code == sf::Keyboard::Escape)
                     win.close();
@@ -24,10 +27,12 @@ int main(){
             }
         }
 
-        mv.Draw();
+        // mv.Draw();
+        ct.render();
 
         win.clear();
-        win.draw(mv);
+        // win.draw(mv);
+        win.draw(ct);
         win.display();
     }
 }
