@@ -28,10 +28,6 @@ void Button::draw(sf::RenderWindow &window) {
     window.draw(text);
 }
 
-void Button::SetOnClick(std::function<void()> func){
-    onClickFxn = func;
-}
-
 bool Button::isMouseOver(sf::RenderWindow& window) {
     sf::FloatRect rect = button.getGlobalBounds();
     sf::Vector2i mPos = sf::Mouse::getPosition(window);
@@ -45,10 +41,5 @@ bool Button::isMouseOver(sf::RenderWindow& window) {
 }
 
 bool Button::isClicked(sf::RenderWindow& window){
-    if (isMouseOver(window) && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-        onClickFxn();
-        return true;
-    } else {
-        return false;
-    }
+    return (isMouseOver(window) && sf::Mouse::isButtonPressed(sf::Mouse::Left));
 }
