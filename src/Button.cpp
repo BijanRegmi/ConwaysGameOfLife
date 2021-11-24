@@ -1,6 +1,9 @@
 #include "Button.hpp"
+#include <iostream>
 
-void Button::Init(std::string str, sf::Vector2f size, int charSize, uint32_t color, sf::Font& font) {
+void Button::Init(std::string str, sf::Vector2f size, int charSize, uint32_t color, sf::Font& f) {
+    font = f;
+
     button.setSize(size);
     button.setFillColor(sf::Color(color));
     button.setOutlineColor(sf::Color(0x002461ff));
@@ -23,9 +26,9 @@ void Button::setPosition(sf::Vector2f point) {
     text.setPosition(point);
 }
 
-void Button::draw(sf::RenderWindow &window) {
-    window.draw(button);
-    window.draw(text);
+void Button::draw(sf::RenderTexture& texture){
+    texture.draw(button);
+    texture.draw(text);
 }
 
 bool Button::isMouseOver(sf::RenderWindow& window) {
