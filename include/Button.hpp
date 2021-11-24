@@ -11,10 +11,12 @@ public:
 	void setPosition(sf::Vector2f point);
 
 	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderTexture& texture);
 
 	bool isMouseOver(sf::RenderWindow& window);
 	bool isClicked(sf::RenderWindow& window);
 private:
 	sf::RectangleShape button;
 	sf::Text text;
+	sf::Font font;
 };
