@@ -11,9 +11,9 @@ int main(){
     win.setFramerateLimit(FPS);
     sf::Event ev;
 
-    MapViewer mv(WIDTH, HEIGHT);
-    controller ct(WIDTH, HEIGHT, mv, win);
-    mv.CreateMap(40, 40);
+    MapViewer mv(WIDTH, 0.9*HEIGHT);
+    controller ct(WIDTH, 0.1*HEIGHT, mv, win);
+    mv.setPosition(0, 0.1*HEIGHT);
 
     while(win.isOpen()){
         while(win.pollEvent(ev)){
@@ -27,11 +27,11 @@ int main(){
             }
         }
 
-        // mv.Draw();
+        mv.render();
         ct.render();
 
         win.clear();
-        // win.draw(mv);
+        win.draw(mv);
         win.draw(ct);
         win.display();
     }

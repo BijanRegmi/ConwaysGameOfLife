@@ -13,6 +13,7 @@ private:
 
     int rows, cols;
     float width, height;
+    bool map_created=false;
 
     void grid();
     void drawAliveCells();
@@ -22,5 +23,5 @@ public:
     void CreateMap(int x, int y);
     void handleInput(sf::Event* ev, sf::RenderWindow* win);
     void Update();
-    void Draw();
+    void render();
 };

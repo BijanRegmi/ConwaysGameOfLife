@@ -32,22 +32,24 @@ void controller::handleInputs(sf::Event& ev){
 }
 
 void controller::onCreate(){
-    std::cout << "Create clicked" << std::endl;
+    mv.CreateMap(40, 40);
+    isRunning = false;
 }
 
 void controller::onStop(){
-    std::cout << "Stop clicked" << std::endl;
+    isRunning = false;
 }
 
 void controller::onStart(){
-    std::cout << "Start clicked" << std::endl;
+    isRunning = true;
 }
 
 void controller::onStep(){
-    std::cout << "Step clicked" << std::endl;
+    mv.Update();
 }
 
 void controller::render(){
+    if (isRunning) mv.Update();
     _texture.clear();
 
     start.draw(_texture);
