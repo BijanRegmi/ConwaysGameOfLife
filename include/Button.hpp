@@ -14,10 +14,7 @@ public:
 
 	bool isMouseOver(sf::RenderWindow& window);
 	bool isClicked(sf::RenderWindow& window);
-
-    void SetOnClick(std::function<void()> func);
 private:
 	sf::RectangleShape button;
 	sf::Text text;
-    std::function<void()> onClickFxn;
 };
