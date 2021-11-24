@@ -3,17 +3,19 @@
 #include <iostream>
 
 int main(){
+    sf::VideoMode def = sf::VideoMode::getDesktopMode();
     const int FPS = 10;
-    const int WIDTH = 1200;
-    const int HEIGHT = 800;
+    const int WIDTH = def.width;
+    const int HEIGHT = def.height;
+    const int CONTROLLER_H = 0.1*HEIGHT;
 
-    sf::RenderWindow win(sf::VideoMode(WIDTH, HEIGHT), "GOL", sf::Style::Default);
+    sf::RenderWindow win(sf::VideoMode(WIDTH, HEIGHT), "Conway's Game Of Life", sf::Style::Fullscreen);
     win.setFramerateLimit(FPS);
     sf::Event ev;
 
-    MapViewer mv(WIDTH, 0.9*HEIGHT);
-    controller ct(WIDTH, 0.1*HEIGHT, mv, win);
-    mv.setPosition(0, 0.1*HEIGHT);
+    MapViewer mv(WIDTH, HEIGHT-CONTROLLER_H);
+    controller ct(WIDTH, CONTROLLER_H, mv, win);
+    mv.setPosition(0, CONTROLLER_H);
 
     while(win.isOpen()){
         while(win.pollEvent(ev)){
