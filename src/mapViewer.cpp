@@ -13,21 +13,30 @@ void MapViewer::CreateTexture(int w, int h){
 }
 
 void MapViewer::CreateMap(int x, int y){
+    if (map_created) delete map_obj;
     rows = x;
     cols = y;
     map_obj = new map(x, y);
+    map_created = true;
 }
 
 void MapViewer::Update(){
-    map_obj->Update();
+    if (map_created) map_obj->Update();
 }
 
 void MapViewer::handleInput(sf::Event* ev, sf::RenderWindow* win){
-    if (ev->type == sf::Event::MouseButtonPressed && ev->key.code == sf::Mouse::Left){
+    if (!map_created) return;
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+        sf::IntRect rect = this->getTextureRect();
         sf::Vector2i mPos = sf::Mouse::getPosition(*win);
-        float dx = width/cols, dy = height/rows;
-        int  col = mPos.x/dx, row = mPos.y/dy;
-        map_obj->fill(row, col);
+        sf::Vector2f deviation = this->getPosition();
+        sf::Vector2i actualMPos(mPos.x-deviation.x, mPos.y-deviation.y);
+
+        if (rect.contains(actualMPos)){
+            float dx = width/cols, dy = height/rows;
+            int  col = actualMPos.x/dx, row = actualMPos.y/dy;
+            map_obj->fill(row, col);
+        }
     }
 }
 
@@ -64,7 +73,8 @@ void MapViewer::drawAliveCells(){
     }
 }
 
-void MapViewer::Draw(){
+void MapViewer::render(){
+    if (!map_created) return;
     _texture.clear();
     grid();
     drawAliveCells();

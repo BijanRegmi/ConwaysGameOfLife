@@ -7,6 +7,8 @@
 
 class controller: public sf::Sprite{
 private:
+    bool isRunning=false;
+
     sf::RenderTexture _texture;
     
     Button start;
