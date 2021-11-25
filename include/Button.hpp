@@ -9,6 +9,7 @@ public:
 	
 	void Init(std::string str, sf::Vector2f size, int charSize, uint32_t color, sf::Font& font);
 	void setPosition(sf::Vector2f point);
+	void setText(std::string str);
 
 	void draw(sf::RenderWindow& window);
 	void draw(sf::RenderTexture& texture);
