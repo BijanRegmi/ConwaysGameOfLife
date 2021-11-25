@@ -15,6 +15,7 @@ private:
     Button stop;
     Button create;
     Button step;
+    Button pattern_btn;
 
     ScrollNum grid_row;
     ScrollNum grid_col;
@@ -24,10 +25,13 @@ private:
     sf::RenderWindow& win;
     sf::Font font;
 
+    int pattern_idx=0;
+
     void onStart();
     void onStop();
     void onStep();
     void onCreate();
+    void onPattern();
 
 public:
     controller(int width, int height, MapViewer& mapViewer, sf::RenderWindow& window);
