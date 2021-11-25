@@ -26,6 +26,10 @@ void Button::setPosition(sf::Vector2f point) {
     text.setPosition(point);
 }
 
+void Button::setText(std::string str){
+    text.setString(str);
+}
+
 void Button::draw(sf::RenderTexture& texture){
     texture.draw(button);
     texture.draw(text);
