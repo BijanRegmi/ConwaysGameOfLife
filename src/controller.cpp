@@ -48,6 +48,7 @@ void controller::handleInputs(sf::Event& ev){
 
 void controller::onCreate(){
     mv.CreateMap(grid_row.getNum(), grid_col.getNum());
+    mv.loadPattern("bob$2bo$3o!");
     isRunning = false;
 }
 
@@ -64,11 +65,7 @@ void controller::onStep(){
 }
 
 void controller::onPattern(){
-    int m = pattern_names.size();
-    int n = (pattern_idx+1)%m;
-    pattern_idx = n;
-    pattern_btn.setText(pattern_names[n]);
-    mv.loadPattern(pattern_names[n]);
+    
 }
 
 void controller::render(){

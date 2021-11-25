@@ -41,14 +41,13 @@ void MapViewer::handleInput(sf::Event* ev, sf::RenderWindow* win){
 }
 
 void MapViewer::loadPattern(std::string p_name){
-    pattern_array p = pattern_list.at(p_name);
+    pattern_array p = Parser::parse_string(p_name);
     int r = p.size();
     int c = p[0].size();
-    
-    // Expand size if the map is too small else clear the map
-    if (rows < r || cols < c) CreateMap(r*6, c*6);
-    else CreateMap(rows, cols);
 
+    // Expand if the map is too small
+    if (rows < r || cols < c) CreateMap(r*4, c*4);
+    
     int rs = (rows-r)/2;
     int cs = (cols-c)/2;
 
