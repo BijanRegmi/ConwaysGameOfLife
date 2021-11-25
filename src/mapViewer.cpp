@@ -40,6 +40,22 @@ void MapViewer::handleInput(sf::Event* ev, sf::RenderWindow* win){
     }
 }
 
+void MapViewer::loadPattern(std::string p_name){
+    pattern_array p = pattern_list.at(p_name);
+    int r = p.size();
+    int c = p[0].size();
+    
+    // Expand size if the map is too small else clear the map
+    if (rows < r || cols < c) CreateMap(r*2, c*2);
+    else CreateMap(rows, cols);
+
+    for (int i=0; i<r; ++i){
+        for (int j=0; j<r; ++j){
+            if (p[i][j]) map_obj->fill(i, j);
+        }
+    }
+}
+
 void MapViewer::grid(){
     int numLines = cols+rows-2;
     sf::VertexArray grid(sf::Lines, 2*(numLines));
