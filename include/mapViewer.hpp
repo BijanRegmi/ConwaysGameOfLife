@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "map.hpp"
+#include "patterns.hpp"
 
 class MapViewer: public sf::Sprite{
 private:
@@ -22,6 +23,7 @@ public:
     MapViewer(int width, int height);
     void CreateMap(int x, int y);
     void handleInput(sf::Event* ev, sf::RenderWindow* win);
+    void loadPattern(std::string pattern_name);
     void Update();
     void render();
 };
