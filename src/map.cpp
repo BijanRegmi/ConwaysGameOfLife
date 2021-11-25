@@ -20,7 +20,6 @@ map::map(int r, int c){
                     if (!i && !j) continue;
                     int rn = (row+i+r)%r;
                     int cn = (col+j+c)%c;
-                    std::cout << "R: " << r << " C: " << c << std::endl;
                     map_array[row][col]->AddNeighbor(map_array[rn][cn]);
                 }
             }

@@ -6,9 +6,18 @@
 #include <map>
 
 typedef std::vector<std::vector<bool>> pattern_array;
+extern std::pair<std::string, std::string> pattern_names;
 
-extern std::map<std::string, pattern_array> pattern_list;
-extern std::vector<std::string> pattern_names;
+namespace Parser{
+
+int getNum(int position, std::string str);
+
+int digitCount(int number);
+
+pattern_array parse_string(std::string str);
+}
+
+
 
 
 #endif // PATTERN_H
