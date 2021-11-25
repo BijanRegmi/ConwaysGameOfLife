@@ -14,12 +14,14 @@ controller::controller(int width, int height, MapViewer& m, sf::RenderWindow& w)
     start.Init("Start", but_size, charSize, 0x000000ff, font);
     stop.Init("Stop", but_size, charSize, 0x000000ff, font);
     step.Init("Step", but_size, charSize, 0x000000ff, font);
+    pattern_btn.Init("Blank", but_size, charSize, 0x000000ff, font);
     create.Init("Create", but_size, charSize, 0x000000ff, font);
 
     start.setPosition(sf::Vector2f(0*width+but_size.x/2, height/2));
-    stop.setPosition(sf::Vector2f(0.25*width+but_size.x/2, height/2));
-    step.setPosition(sf::Vector2f(0.5*width+but_size.x/2, height/2));
-    create.setPosition(sf::Vector2f(0.75*width+but_size.x/2, height/2));
+    stop.setPosition(sf::Vector2f(0.2*width+but_size.x/2, height/2));
+    step.setPosition(sf::Vector2f(0.4*width+but_size.x/2, height/2));
+    pattern_btn.setPosition(sf::Vector2f(0.6*width+but_size.x/2, height/2));
+    create.setPosition(sf::Vector2f(0.8*width+but_size.x/2, height/2));
 
     grid_col.setString("20");
     grid_row.setString("20");
@@ -29,8 +31,8 @@ controller::controller(int width, int height, MapViewer& m, sf::RenderWindow& w)
     grid_row.setFont(font);
     grid_col.setCharacterSize(charSize);
     grid_row.setCharacterSize(charSize);
-    grid_col.setPosition(0.75*width+but_size.x, 0);
-    grid_row.setPosition(0.75*width+but_size.x, height/2);
+    grid_col.setPosition(width-but_size.x/2, 0);
+    grid_row.setPosition(width-but_size.x/2, height/2);
 }
 
 void controller::handleInputs(sf::Event& ev){
@@ -41,6 +43,7 @@ void controller::handleInputs(sf::Event& ev){
     if (stop.isClicked(win)) onStop();
     if (step.isClicked(win)) onStep();
     if (create.isClicked(win)) onCreate();
+    if (pattern_btn.isClicked(win)) onPattern();
 }
 
 void controller::onCreate(){
@@ -60,6 +63,14 @@ void controller::onStep(){
     mv.Update();
 }
 
+void controller::onPattern(){
+    int m = pattern_names.size();
+    int n = (pattern_idx+1)%m;
+    pattern_idx = n;
+    pattern_btn.setText(pattern_names[n]);
+    mv.loadPattern(pattern_names[n]);
+}
+
 void controller::render(){
     if (isRunning) mv.Update();
     _texture.clear();
@@ -68,6 +79,7 @@ void controller::render(){
     stop.draw(_texture);
     create.draw(_texture);
     step.draw(_texture);
+    pattern_btn.draw(_texture);
     _texture.draw(grid_row);
     _texture.draw(grid_col);
 
