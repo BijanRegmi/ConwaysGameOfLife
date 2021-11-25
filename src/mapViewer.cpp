@@ -46,12 +46,15 @@ void MapViewer::loadPattern(std::string p_name){
     int c = p[0].size();
     
     // Expand size if the map is too small else clear the map
-    if (rows < r || cols < c) CreateMap(r*2, c*2);
+    if (rows < r || cols < c) CreateMap(r*6, c*6);
     else CreateMap(rows, cols);
 
-    for (int i=0; i<r; ++i){
-        for (int j=0; j<c; ++j){
-            if (p[i][j]) map_obj->fill(i, j);
+    int rs = (rows-r)/2;
+    int cs = (cols-c)/2;
+
+    for (int i=rs; i<r+rs; ++i){
+        for (int j=cs; j<c+cs; ++j){
+            if (p[i-rs][j-cs]) map_obj->fill(i, j);
         }
     }
 }
