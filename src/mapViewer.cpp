@@ -12,11 +12,11 @@ void MapViewer::CreateTexture(int w, int h){
     this->setTexture(_texture.getTexture());
 }
 
-void MapViewer::CreateMap(int x, int y){
+void MapViewer::CreateMap(int r, int c){
     if (map_created) delete map_obj;
-    rows = x;
-    cols = y;
-    map_obj = new map(x, y);
+    rows = r;
+    cols = c;
+    map_obj = new map(r, c);
     map_created = true;
 }
 
@@ -50,7 +50,7 @@ void MapViewer::loadPattern(std::string p_name){
     else CreateMap(rows, cols);
 
     for (int i=0; i<r; ++i){
-        for (int j=0; j<r; ++j){
+        for (int j=0; j<c; ++j){
             if (p[i][j]) map_obj->fill(i, j);
         }
     }

@@ -1,11 +1,11 @@
 #include "map.hpp"
 #include <iostream>
 
-map::map(int x, int y){
+map::map(int r, int c){
     // Create map array
-    for (int row=0; row<y; ++row){
+    for (int row=0; row<r; ++row){
         std::vector<cell*> horiz;
-        for (int col=0; col<x; ++col){
+        for (int col=0; col<c; ++col){
             cell* c = new cell;
             horiz.push_back(c);
         }
@@ -13,14 +13,15 @@ map::map(int x, int y){
     }
 
     // Add Neighbors
-    for (int row=0; row<y; ++row){
-        for (int col=0; col<x; ++col){
+    for (int row=0; row<r; ++row){
+        for (int col=0; col<c; ++col){
             for (int i=-1; i<2; ++i){
                 for (int j=-1; j<2; ++j){
                     if (!i && !j) continue;
-                    int r = (row+i+y)%y;
-                    int c = (col+j+x)%x;
-                    map_array[row][col]->AddNeighbor(map_array[r][c]);
+                    int rn = (row+i+r)%r;
+                    int cn = (col+j+c)%c;
+                    std::cout << "R: " << r << " C: " << c << std::endl;
+                    map_array[row][col]->AddNeighbor(map_array[rn][cn]);
                 }
             }
         }
